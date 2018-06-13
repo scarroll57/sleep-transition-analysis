@@ -1,4 +1,3 @@
-Attribute VB_Name = "sleep_transistion_analysis"
 Sub sleep_transistion_analysis()
 
     'Select the spreadsheet where the data is located
