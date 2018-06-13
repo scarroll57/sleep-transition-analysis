@@ -21,52 +21,60 @@ Sub sleep_transistion_analysis()
     Dim n2n1, n3n2, n3n1, Rn1, Rn2, Rn3, n1w, n2w, n3w, Rw As Long
     Dim tracker1, tracker2 As Long
 
+    n2n1 = 0
+    n3n2 = 0
+    n3n1 = 0
+    Rn1 = 0
+    Rn2 = 0
+    Rn3 = 0
+    n1w = 0
+    n2w = 0
+    n3w = 0
+    Rw = 0
+
+
     'Analyze each epoch set for transitions
     For x = 3 To FinalRow
         tracker1 = Cells(x - 1, 3).Value
         tracker2 = Cells(x, 3).Value
 
         If tracker2 < tracker1 Then
-
             'test to see which transition set to add the transition to
             'this should protect against adding unstaged transitions
             'test to see if transitioning from N2 to N1
-            If tracker2 = 1 & tracker1 = 2 Then
+            If tracker2 = 1 And tracker1 = 2 Then
                 n2n1 = n2n1 + 1
             End If
             'test to see if transitioning from N3 to N2
-            If tracker2 = 2 & tracker1 = 3 Then
+            If tracker2 = 2 And tracker1 = 3 Then
                 n3n2 = n3n2 + 1
             End If
-            If tracker2 = 1 & tracker1 = 1 Then
-                n3n1 = n3n1 + 1
-            End If
             'test to see if transitioning from Rem to N3
-            If tracker2 = 3 & tracker1 = 5 Then
+            If tracker2 = 3 And tracker1 = 5 Then
                 Rn3 = Rn3 + 1
             End If
             'test to see if transitioning from Rem to N2
-            If tracker2 = 2 & tracker1 = 5 Then
+            If tracker2 = 2 And tracker1 = 5 Then
                 Rn2 = Rn2 + 1
             End If
             'test to see if transitioning from Rem to N1
-            If tracker2 = 1 & tracker1 = 5 Then
+            If tracker2 = 1 And tracker1 = 5 Then
                 Rn1 = Rn1 + 1
             End If
             'test to see if transitioning from Rem to Wake
-            If tracker2 = 0 & tracker1 = 5 Then
+            If tracker2 = 0 And tracker1 = 5 Then
                 Rw = Rw + 1
             End If
             'test to see if transitioning from N1 to Wake
-            If tracker2 = 0 & tracker1 = 1 Then
+            If tracker2 = 0 And tracker1 = 1 Then
                 n1w = n1w + 1
             End If
             'test to see if transitioning from N2 to Wake
-            If tracker2 = 0 & tracker1 = 2 Then
+            If tracker2 = 0 And tracker1 = 2 Then
                 n2w = n2w + 1
             End If
             'test to see if transitioning from N3 to wake
-            If tracker2 = 0 & tracker1 = 3 Then
+            If tracker2 = 0 And tracker1 = 3 Then
                 n3w = n3w + 1
             End If
 
@@ -118,6 +126,7 @@ Sub sleep_transistion_analysis()
     Range("I8").Value = "NREM to Wake transitions"
     Range("I9").Value = n1w + n2w + n3w
 
+    Range("F1").Value = n1
 
 End Sub
 
