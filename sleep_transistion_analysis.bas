@@ -82,6 +82,12 @@ Sub sleep_transistion_analysis()
 
     Next x
 
+    'Convert Total Sleep Time from minutes to hours
+    TST_hour = Cells(2, 5).Value / 60
+
+    'Print Hour Conversion on The Spreadsheet
+    Range("E3").Value = "Total Sleep Time in Hours"
+    Range("E4").Value = TST_hour
 
     'Print Values on the Spreadsheet
     Range("G1").Value = "N2 to N1"
@@ -110,28 +116,35 @@ Sub sleep_transistion_analysis()
     'Also print to spreadsheet
     Range("G4").Value = "Lightening of Sleep transitions"
     Range("G5").Value = n2n1 + n3n2 + Rn1 + Rn2 + Rn3 + Rw + n1w + n2w + n3w
+    Range("H5").Value = Range("G5").Value / TST_hour
 
     Range("G6").Value = "REM to NREM transitions"
     Range("G7").Value = Rn1 + Rn2 + Rn3
+    Range("H7").Value = Range("G7").Value / TST_hour
 
     Range("G8").Value = "NREM to lesser NREM transitions"
     Range("G9").Value = n2n1 + n3n2 + n3n1
+    Range("H9").Value = Range("G9").Value / TST_hour
 
     Range("I4").Value = "Sleep to Wake transitions"
     Range("I5").Value = n1w + n2w + n3w + Rw
+    Range("I5").Value = Range("I5").Value / TST_hour
 
     Range("I6").Value = "REM to Wake transitions"
     Range("I7").Value = Rw
+    Range("I7").Value = Range("I7").Value / TST_hour
 
     Range("I8").Value = "NREM to Wake transitions"
     Range("I9").Value = n1w + n2w + n3w
+    Range("I9").Value = Range("I9").Value / TST_hour
 
-    Range("F1").Value = n1
+    Range("L4").Value = "The table beside this contains the total number of events and the index listed in Event, Index format"
 
 End Sub
 
 Function conversion(raw)
-
+    'This function serves as a simplification of the code to convert the epoch staging to a numerical format
+    'The If statement belos uses conditional logic to check each input value
     If raw = "U" Then
         conversion = -1
     ElseIf raw = "W" Then
