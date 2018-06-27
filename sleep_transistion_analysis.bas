@@ -18,7 +18,7 @@ Sub sleep_transistion_analysis()
     Next x
 
     'Distingish variables
-    Dim n2n1, n3n2, n3n1, Rn1, Rn2, Rn3, n1w, n2w, n3w, Rw As Long
+    Dim n2n1, n3n2, n3n1, Rn1, Rn2, n1w, n2w, n3w, Rw As Long   'Rn3 removed on 6_27_2018 on request from end user
     Dim tracker1, tracker2 As Long
 
     n2n1 = 0
@@ -26,7 +26,7 @@ Sub sleep_transistion_analysis()
     n3n1 = 0
     Rn1 = 0
     Rn2 = 0
-    Rn3 = 0
+    'Rn3 = 0 NOTE: Removed on 6_27_2018 on request from end user
     n1w = 0
     n2w = 0
     n3w = 0
@@ -49,10 +49,10 @@ Sub sleep_transistion_analysis()
             If tracker2 = 2 And tracker1 = 3 Then
                 n3n2 = n3n2 + 1
             End If
-            'test to see if transitioning from Rem to N3
-            If tracker2 = 3 And tracker1 = 5 Then
-                Rn3 = Rn3 + 1
-            End If
+            'test to see if transitioning from Rem to N3 - NOTE: taken out on 6_27_2018 on request from end user
+            'If tracker2 = 3 And tracker1 = 5 Then
+            '    Rn3 = Rn3 + 1
+            'End If
             'test to see if transitioning from Rem to N2
             If tracker2 = 2 And tracker1 = 5 Then
                 Rn2 = Rn2 + 1
@@ -106,7 +106,7 @@ Sub sleep_transistion_analysis()
     Range("I2").Value = n3n1
     Range("J2").Value = Rn1
     Range("K2").Value = Rn2
-    Range("L2").Value = Rn3
+    Range("L2").Value = "Removed" 'Rn3 removed
     Range("M2").Value = Rw
     Range("N2").Value = n1w
     Range("O2").Value = n2w
@@ -115,11 +115,11 @@ Sub sleep_transistion_analysis()
     'Math to Calculate Sleep State Transitions
     'Also print to spreadsheet
     Range("G4").Value = "Lightening of Sleep transitions"
-    Range("G5").Value = n2n1 + n3n2 + Rn1 + Rn2 + Rn3 + Rw + n1w + n2w + n3w
+    Range("G5").Value = n2n1 + n3n2 + Rn1 + Rn2 + Rw + n1w + n2w + n3w  'removed Rn3 from equation on 6_27_2018
     Range("H5").Value = Range("G5").Value / TST_hour
 
     Range("G6").Value = "REM to NREM transitions"
-    Range("G7").Value = Rn1 + Rn2 + Rn3
+    Range("G7").Value = Rn1 + Rn2   'Removed Rn3 from equation on 6_27_2018
     Range("H7").Value = Range("G7").Value / TST_hour
 
     Range("G8").Value = "NREM to lesser NREM transitions"
@@ -128,15 +128,15 @@ Sub sleep_transistion_analysis()
 
     Range("I4").Value = "Sleep to Wake transitions"
     Range("I5").Value = n1w + n2w + n3w + Rw
-    Range("I5").Value = Range("I5").Value / TST_hour
+    Range("J5").Value = Range("I5").Value / TST_hour
 
     Range("I6").Value = "REM to Wake transitions"
     Range("I7").Value = Rw
-    Range("I7").Value = Range("I7").Value / TST_hour
+    Range("J7").Value = Range("I7").Value / TST_hour
 
     Range("I8").Value = "NREM to Wake transitions"
     Range("I9").Value = n1w + n2w + n3w
-    Range("I9").Value = Range("I9").Value / TST_hour
+    Range("J9").Value = Range("I9").Value / TST_hour
 
     Range("L4").Value = "The table beside this contains the total number of events and the index listed in Event, Index format"
 
